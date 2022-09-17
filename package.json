@@ -1,20 +1,15 @@
 {
   "name": "project-x",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".prettierrc.js",
   "private": true,
+  "workspaces": [
+    "packages/**"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "next": "12.3.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "eslint": "8.23.1",
-    "eslint-config-next": "12.3.0"
-  }
+  "author": "",
+  "license": "ISC"
 }
