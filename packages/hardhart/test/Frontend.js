@@ -1,8 +1,6 @@
 const {
-  time,
   loadFixture,
 } = require("@nomicfoundation/hardhat-network-helpers");
-const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
 
 describe("Frontend", function () {
@@ -22,15 +20,36 @@ describe("Frontend", function () {
       // arrange
       const { contract, owner } = await loadFixture(deployOneYearLockFixture);
       const payload = [{inheritor: '0xeA6011Ff0d0D076C40d41EF33BC1D25FF5a52c15', share: 100 }]
-      await contract.setup(payload)
+      const reportTime = 60 * 60 * 24 * 7
+      await contract.setup(payload, reportTime, '0xeA6011Ff0d0D076C40d41EF33BC1D25FF5a52c15')
 
       // act
-      const result = await contract.getter(owner.address)
+      const inheritors = await contract.getter(owner.address)
+      const testemony = await contract.testimonies(owner.address)
 
       // assert
-      expect(result[0].inheritor).to.eq(payload[0].inheritor)
-      expect(result[0].share).to.eq(payload[0].share)
-      expect(result.length).to.eq(1)
+      expect(inheritors[0].inheritor).to.eq(payload[0].inheritor)
+      expect(inheritors[0].share).to.eq(payload[0].share)
+      expect(testemony.reportTime).to.eq(reportTime);
+      expect(inheritors.length).to.eq(1)
+    });
+
+    it("should return if owner is alive", async function () {
+      // arrange
+      const { contract, owner } = await loadFixture(deployOneYearLockFixture);
+      const payload = [{inheritor: '0xeA6011Ff0d0D076C40d41EF33BC1D25FF5a52c15', share: 100 }]
+      const reportTime = 60 * 60 * 24 * 7
+      await contract.setup(payload, reportTime, '0xeA6011Ff0d0D076C40d41EF33BC1D25FF5a52c15')
+      const nowPlus8Days = Math.ceil(new Date().getTime() / 1000) + (60 * 60 * 24 * 8)
+      const nowPlus6Days = Math.ceil(new Date().getTime() / 1000) + (60 * 60 * 24 * 6)
+
+      // act
+      const result6Days = await contract.ownerIsAlive(owner.address, nowPlus6Days)
+      const result8Days = await contract.ownerIsAlive(owner.address, nowPlus8Days)
+
+      // assert
+      expect(result6Days).to.eq(true);
+      expect(result8Days).to.eq(false);
     });
   });
 

@@ -3,9 +3,10 @@ pragma solidity ^0.8.9;
 
 library SharedStructs {
     struct Testimony {
-        uint id;
         address owner;
         Inheritor[] inheritors;
+        uint lastAlive;
+        uint reportTime;
     }
 
     struct Inheritor {
