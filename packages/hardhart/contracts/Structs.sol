@@ -7,10 +7,13 @@ library SharedStructs {
         Inheritor[] inheritors;
         uint lastAlive;
         uint reportTime;
+        uint deathBalance;
+        bool isDead;
     }
 
     struct Inheritor {
         address inheritor;
         uint share;
+        uint balanceWithdrawn;
     }
 }
