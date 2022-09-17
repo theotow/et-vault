@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "hardhat run scripts/deploy.js"
+    "clean": "hardhat clean",
+    "deploy-local": "hardhat run scripts/deploy.js",
+    "deploy": "hardhat run scripts/deploy.js --network goerli"
   },
   "author": "",
   "license": "ISC",

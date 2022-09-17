@@ -14,4 +14,5 @@ create a .env file in this folder with following content
 
 ```
 GOERLI_PRIVATE_KEY=private key of deployer account
+ALCHEMY_KEY=ask me
 ```
