@@ -5,7 +5,11 @@ import {
   configureChains,
   chain,
 } from 'wagmi'
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  lightTheme,
+} from '@rainbow-me/rainbowkit'
 import { ThemeProvider, CssBaseline, createTheme } from '@mui/material'
 
 import { publicProvider } from 'wagmi/providers/public'
@@ -64,12 +68,28 @@ const theme = createTheme({
   shadows: ['none'],
 })
 
+const walletTheme = lightTheme({
+  accentColor: '#B2B5B2',
+  accentColorForeground: 'white',
+  borderRadius: 'none',
+  fontStack: 'system',
+  overlayBlur: 'none',
+  connectButtonBackground: 'transparent',
+})
+walletTheme.shadows.connectButton = 'none'
+walletTheme.fonts.body = font
+
 export function Providers(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <WagmiConfig client={client}>
-        <RainbowKitProvider chains={chains}>
+        <RainbowKitProvider
+          coolMode
+          modalSize="compact"
+          chains={chains}
+          theme={walletTheme}
+        >
           {props.children}
         </RainbowKitProvider>
       </WagmiConfig>

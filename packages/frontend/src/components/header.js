@@ -7,33 +7,34 @@ import {
   Button,
 } from '@mui/material'
 import { alpha, styled } from '@mui/material/styles'
+import { ConnectButton, useConnectModal } from '@rainbow-me/rainbowkit'
+import { useAccount } from 'wagmi'
 
 const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
   backgroundColor: '#888888',
 }))
 
 export function Header() {
+  const { isConnected } = useAccount()
+  const { openConnectModal } = useConnectModal()
   return (
     <AppBar component="nav" sx={{ boxShadow: 'none' }}>
       <ToolbarStyled>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={() => {}}
-          sx={{ mr: 2, display: { sm: 'none' } }}
-        >
-          Icon
-        </IconButton>
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          sx={{ flexGrow: 1, display: 'block' }}
         >
-          MUI
+          ET-VAULT
         </Typography>
-        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-          <Button sx={{ color: '#fff' }}>Connect Wallet</Button>
+        <Box sx={{ display: 'block' }}>
+          {isConnected ? (
+            <ConnectButton />
+          ) : (
+            <Button sx={{ color: '#fff' }} onClick={() => openConnectModal()}>
+              Connect Wallet
+            </Button>
+          )}
         </Box>
       </ToolbarStyled>
     </AppBar>
