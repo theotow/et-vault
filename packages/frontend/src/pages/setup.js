@@ -130,7 +130,10 @@ function SetupGuard() {
   return (
     <Typography>
       Please follow following{' '}
-      <Link href="https://gnosis-safe.io/app/welcome" target={'_blank'}>
+      <Link
+        href="https://help.gnosis-safe.io/en/articles/5496893-add-a-transaction-guard"
+        target={'_blank'}
+      >
         tutorial
       </Link>{' '}
       to install the guard. The address of the guard contract is:{' '}
