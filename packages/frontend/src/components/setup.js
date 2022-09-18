@@ -54,7 +54,7 @@ export function Setup() {
     <div>
       <TextField
         id="filled-basic"
-        label="Gnosis-safe address"
+        label="Gnosis-safe eth-address"
         variant="filled"
         onBlur={(e) => setAddress(e.target.value)}
         sx={{ width: '100%' }}
@@ -82,7 +82,7 @@ export function Setup() {
         min={1}
         max={100}
         onBlur={(e) => setPingTime(e.target.value)}
-        label="Ping Interval"
+        label="Ping Interval (days)"
         variant="filled"
         sx={{ width: '100%' }}
       />
@@ -112,7 +112,7 @@ function Inheritor(props) {
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
         <TextField
           id="filled-basic"
-          label="Address of inheritor"
+          label="inheritor eth-address"
           variant="filled"
           onBlur={props.fieldChange('address')}
           sx={{ width: '100%' }}
@@ -123,7 +123,7 @@ function Inheritor(props) {
           min={1}
           max={100}
           onBlur={props.fieldChange('percent', 'int')}
-          label="Percentage"
+          label="accessible percentage"
           variant="filled"
           sx={{ width: '100%' }}
         />

@@ -18,7 +18,7 @@ export default function SetupPage() {
   return (
     <Layout>
       <Paper elevation={0} sx={{ border: '2px solid #B2B5B2', padding: 2 }}>
-        <Typography variant="h1" gutterBottom>
+        <Typography sx={{ textAlign: 'center' }} variant="h1" gutterBottom>
           Vault Setup
         </Typography>
         <VerticalLinearStepper />
@@ -37,7 +37,7 @@ const steps = [
     component: () => <SetupGuard />,
   },
   {
-    label: 'Create an ad',
+    label: 'Create vault',
     component: () => <Setup />,
   },
 ]
@@ -76,13 +76,11 @@ function VerticalLinearStepper() {
                       Continue
                     </Button>
                   )}
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
+                  {index != 0 && (
+                    <Button onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
+                      Back
+                    </Button>
+                  )}
                 </div>
               </Box>
             </StepContent>
@@ -117,5 +115,14 @@ function SetupGnosis() {
 }
 
 function SetupGuard() {
-  return <Typography>Address Guard: {GUARD_CONTRACT}</Typography>
+  return (
+    <Typography>
+      Please follow following{' '}
+      <Link href="https://gnosis-safe.io/app/welcome" target={'_blank'}>
+        tutorial
+      </Link>{' '}
+      to install the guard. The address of the guard contract is:{' '}
+      <b>{GUARD_CONTRACT}</b>
+    </Typography>
+  )
 }

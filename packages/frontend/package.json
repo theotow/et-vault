@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "build": "next build && next export",
-    "deploy": "surge ./out/ tawdry-fiction.surge.sh"
+    "deploy": "yarn build && surge ./out/ et-vault.surge.sh"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
