@@ -62,26 +62,20 @@ function VerticalLinearStepper() {
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.label}>
-            <StepLabel
-              optional={
-                index === 2 ? (
-                  <Typography variant="caption">Last step</Typography>
-                ) : null
-              }
-            >
-              {step.label}
-            </StepLabel>
+            <StepLabel>{step.label}</StepLabel>
             <StepContent>
               {step.component()}
               <Box sx={{ mb: 2 }}>
                 <div>
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                  </Button>
+                  {index === steps.length - 1 ? null : (
+                    <Button
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Continue
+                    </Button>
+                  )}
                   <Button
                     disabled={index === 0}
                     onClick={handleBack}

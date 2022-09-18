@@ -4,7 +4,7 @@ import {
   useWaitForTransaction,
 } from 'wagmi'
 import { FRONTEND_CONTRACT } from '../constants'
-import { Paper, TextField, Button, Box, Stack, Alert } from '@mui/material'
+import { TextField, Button, Box, Stack, Alert } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import FrontendAbi from '../abi/contracts/Frontend.sol/Frontend.json'
 import { useState } from 'react'
@@ -16,6 +16,7 @@ const getDummy = () => ({ address: '', percent: 100 })
 
 export function Setup() {
   const router = useRouter()
+  const [error, setError] = useState()
   const [gnosisAddress, setAddress] = useState('')
   const [pingTime, setPingTime] = useState(0)
   const [inheritors, setInheritor] = useState([getDummy()])
@@ -25,14 +26,14 @@ export function Setup() {
     gnosisAddress,
   ]
   console.log(args)
-  const prepareWrite = usePrepareContractWrite({
+  const executeWrite = useContractWrite({
     mode: 'recklesslyUnprepared',
     addressOrName: FRONTEND_CONTRACT,
     contractInterface: FrontendAbi,
     functionName: 'setup',
     args,
+    onError: (e) => setError(e.message),
   })
-  const executeWrite = useContractWrite(prepareWrite.config)
   const fieldChange = (index) => (field, type) => (e) => {
     setInheritor(
       produce((draft) => {
@@ -46,12 +47,9 @@ export function Setup() {
     onSettled: () => {
       router.push('/done')
     },
+    onError: (e) => setError(e.message),
   })
   const isLoading = waitForTx.isLoading || executeWrite.isLoading
-  const err =
-    executeWrite.error?.message ||
-    prepareWrite.error?.message ||
-    waitForTx.error?.message
   return (
     <div>
       <TextField
@@ -91,6 +89,7 @@ export function Setup() {
       <Box sx={{ marginTop: 3 }} />
       <LoadingButton
         loading={isLoading}
+        loadingPosition="start"
         disabled={!executeWrite.write}
         variant="contained"
         size="medium"
@@ -98,9 +97,9 @@ export function Setup() {
       >
         Submit
       </LoadingButton>
-      {err && (
+      {error && (
         <Alert sx={{ mt: 1 }} severity="error">
-          {err}
+          {error}
         </Alert>
       )}
     </div>
