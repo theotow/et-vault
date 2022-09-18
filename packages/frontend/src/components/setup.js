@@ -54,7 +54,7 @@ export function Setup() {
     <div>
       <TextField
         id="filled-basic"
-        label="Gnosis-safe eth-address"
+        label="gnosis-safe eth-address"
         variant="filled"
         onBlur={(e) => setAddress(e.target.value)}
         sx={{ width: '100%' }}
@@ -82,7 +82,7 @@ export function Setup() {
         min={1}
         max={100}
         onBlur={(e) => setPingTime(e.target.value)}
-        label="Ping Interval (days)"
+        label="days until unlock if no sign of life"
         variant="filled"
         sx={{ width: '100%' }}
       />

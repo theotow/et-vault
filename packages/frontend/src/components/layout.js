@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Container } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import { Header } from '../components/header'
 
 export function Layout(props) {
@@ -8,6 +8,19 @@ export function Layout(props) {
       <Header />
       <Container maxWidth="md" sx={{ marginTop: 10 }}>
         {props.children}
+        <div>
+          <Typography
+            component={'a'}
+            href="https://github.com/theotow/et-vault"
+            target={'_blank'}
+            textAlign="center"
+            variant="overline"
+            display="block"
+            gutterBottom
+          >
+            Github
+          </Typography>
+        </div>
       </Container>
     </Box>
   )

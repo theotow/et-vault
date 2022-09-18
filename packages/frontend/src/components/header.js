@@ -1,12 +1,5 @@
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Box,
-  Button,
-} from '@mui/material'
-import { alpha, styled } from '@mui/material/styles'
+import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { ConnectButton, useConnectModal } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 import Link from 'next/link'

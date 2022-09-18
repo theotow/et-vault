@@ -3,3 +3,8 @@
 body {
   background-color: #f6f7f8 !important;
 }
+
+a {
+  color: black;
+  text-decoration: none; /* no underline */
+}

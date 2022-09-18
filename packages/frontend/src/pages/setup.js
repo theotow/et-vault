@@ -22,6 +22,16 @@ export default function SetupPage() {
         <Typography sx={{ textAlign: 'center' }} variant="h2" gutterBottom>
           Vault Setup
         </Typography>
+        <Typography
+          variant="body1"
+          sx={{ mb: 4, maxWidth: 650, ml: 'auto', mr: 'auto' }}
+        >
+          Getting things in order is always a bit of work, so is the process to
+          setup your inheritance distribution. We utilize the gnosis-vault to
+          keep your assets secure. By installing a guard in the vault we can
+          control that your assets are only passed on to your inheritors after
+          your passing.
+        </Typography>
         <AuthGuard>
           <VerticalLinearStepper />
         </AuthGuard>
@@ -40,7 +50,7 @@ const steps = [
     component: () => <SetupGuard />,
   },
   {
-    label: 'Create vault',
+    label: 'Create vault and inheritors',
     component: () => <Setup />,
   },
 ]
@@ -105,12 +115,11 @@ function VerticalLinearStepper() {
 function SetupGnosis() {
   return (
     <Typography>
-      We are very concerned about the safety of your funds. Thats why we use
-      gnosis-safe to store your funds in a battle tested vault. Follow this{' '}
+      Follow this{' '}
       <Link href="https://gnosis-safe.io/app/welcome" target={'_blank'}>
-        Link
+        link
       </Link>{' '}
-      to create your vault with the easy 4 steps process on the gnosis website.
+      to create your vault with the easy 4 step process on the gnosis website.
       Make sure to yourself and your inheritors as owners of the vault, and keep
       the <b>requires the confirmation of</b> as 1 out of X owner(s)
     </Typography>
