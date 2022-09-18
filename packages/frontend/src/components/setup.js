@@ -1,8 +1,4 @@
-import {
-  usePrepareContractWrite,
-  useContractWrite,
-  useWaitForTransaction,
-} from 'wagmi'
+import { useContractWrite, useWaitForTransaction } from 'wagmi'
 import { FRONTEND_CONTRACT } from '../constants'
 import { TextField, Button, Box, Stack, Alert } from '@mui/material'
 import { Add } from '@mui/icons-material'
@@ -93,7 +89,7 @@ export function Setup() {
       <Box sx={{ marginTop: 3 }} />
       <LoadingButton
         loading={isLoading}
-        loadingPosition="start"
+        loadingPosition="center"
         disabled={!executeWrite.write}
         variant="contained"
         size="medium"
@@ -102,7 +98,7 @@ export function Setup() {
         Submit
       </LoadingButton>
       {error && (
-        <Alert sx={{ mt: 1 }} severity="error">
+        <Alert sx={{ mt: 1, mb: 1 }} severity="error">
           {error}
         </Alert>
       )}

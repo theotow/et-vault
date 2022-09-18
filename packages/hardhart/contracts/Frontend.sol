@@ -11,7 +11,7 @@ contract Frontend is IFrontend {
     constructor() {}
 
     function iamAlive() public {
-        require(ownerToTestemonies[msg.sender].owner == address(0), "you dont have a vault");
+        require(ownerToTestemonies[msg.sender].owner != address(0), "you dont have a vault");
         ownerToTestemonies[msg.sender].lastAlive = block.timestamp;
     }
 

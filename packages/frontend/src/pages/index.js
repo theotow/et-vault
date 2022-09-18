@@ -1,20 +1,10 @@
 import * as React from 'react'
 import { Layout } from '../components/layout'
 import { Paper, Typography, Button, Box } from '@mui/material'
-import { usePrepareContractWrite, useContractWrite, useAccount } from 'wagmi'
-import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useRouter } from 'next/router'
 
 export default function MainPage() {
-  const { isConnected } = useAccount()
-  const { openConnectModal } = useConnectModal()
   const router = useRouter()
-
-  React.useEffect(() => {
-    if (isConnected) {
-      router.replace('/setup')
-    }
-  }, [isConnected, router])
 
   return (
     <Layout>
@@ -38,10 +28,9 @@ export default function MainPage() {
           <Button
             variant="contained"
             size="large"
-            disabled={isConnected}
-            onClick={() => openConnectModal()}
+            onClick={() => router.replace('/setup')}
           >
-            Get started
+            Setup Vault
           </Button>
         </Box>
       </Paper>

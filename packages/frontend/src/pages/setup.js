@@ -13,6 +13,7 @@ import {
 } from '@mui/material'
 import { Setup } from '../components/setup'
 import { GUARD_CONTRACT } from '../constants'
+import { AuthGuard } from '../guard/auth'
 
 export default function SetupPage() {
   return (
@@ -21,7 +22,9 @@ export default function SetupPage() {
         <Typography sx={{ textAlign: 'center' }} variant="h2" gutterBottom>
           Vault Setup
         </Typography>
-        <VerticalLinearStepper />
+        <AuthGuard>
+          <VerticalLinearStepper />
+        </AuthGuard>
       </Paper>
     </Layout>
   )
