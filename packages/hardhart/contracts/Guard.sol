@@ -33,7 +33,7 @@ contract Guard is BaseGuard {
             return; // the frontend was not jet initialized
         }
 
-        require((keccak256(abi.encodePacked(data)) == keccak256(abi.encodePacked(SIG_GUARD_REMOVE)) && msgSender != owner), "you are not allowed to remove the quard");
+        require(!(keccak256(abi.encodePacked(data)) == keccak256(abi.encodePacked(SIG_GUARD_REMOVE))) || (msgSender == owner), "you are not allowed to remove the quard");
         IFrontend(FRONTEND).withdrawNative(to, value, gnosisSafeAddress, msgSender);
     }
 

@@ -18,7 +18,7 @@ export default function SetupPage() {
   return (
     <Layout>
       <Paper elevation={0} sx={{ border: '2px solid #B2B5B2', padding: 2 }}>
-        <Typography sx={{ textAlign: 'center' }} variant="h1" gutterBottom>
+        <Typography sx={{ textAlign: 'center' }} variant="h2" gutterBottom>
           Vault Setup
         </Typography>
         <VerticalLinearStepper />

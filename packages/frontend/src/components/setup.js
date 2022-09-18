@@ -44,8 +44,12 @@ export function Setup() {
   }
   const waitForTx = useWaitForTransaction({
     hash: executeWrite.data?.hash,
-    onSettled: () => {
-      router.push('/done')
+    onSettled: (_, error) => {
+      if (!error) {
+        router.push('/vault', { query: { id: gnosisAddress } })
+      } else {
+        setError(error.message)
+      }
     },
     onError: (e) => setError(e.message),
   })
