@@ -9,12 +9,12 @@ const hre = require("hardhat");
 async function main() {
   const Frontend = await hre.ethers.getContractFactory("Frontend");
   const frontend = await Frontend.deploy();
-  await frontend.deployed();
+  await frontend.deployTransaction.wait(1);
   console.log('frontend', frontend.address)
 
   const Guard = await hre.ethers.getContractFactory("Guard");
-  const guard = await Guard.deploy();
-  await guard.deployed();
+  const guard = await Guard.deploy(frontend.address);
+  await guard.deployTransaction.wait(1);
   console.log('guard', guard.address)
 }
 

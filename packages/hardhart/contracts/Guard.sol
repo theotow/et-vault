@@ -28,7 +28,12 @@ contract Guard is BaseGuard {
         address msgSender
     ) external override {
         address gnosisSafeAddress = msg.sender;
-        require((keccak256(abi.encodePacked(data)) == keccak256(abi.encodePacked(SIG_GUARD_REMOVE)) && msgSender != IFrontend(FRONTEND).getOwnerOfVault(gnosisSafeAddress)), "you are not allowed to remove the quard");
+        address owner = IFrontend(FRONTEND).getOwnerOfVault(gnosisSafeAddress);
+        if (owner == address(0)) {
+            return; // the frontend was not jet initialized
+        }
+
+        require((keccak256(abi.encodePacked(data)) == keccak256(abi.encodePacked(SIG_GUARD_REMOVE)) && msgSender != owner), "you are not allowed to remove the quard");
         IFrontend(FRONTEND).withdrawNative(to, value, gnosisSafeAddress, msgSender);
     }
 
