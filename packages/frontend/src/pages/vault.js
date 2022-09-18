@@ -48,8 +48,8 @@ export default function Vault() {
     args: [query1.data],
   })
   const inheritors = query3.data || []
-  const days = (query2.data?.reportTime?.toNumber() || 0) / (60 * 60 * 24)
-  const isOwner = query2.data?.owner === address && !!address
+  const days = (query2.data?.[2]?.toNumber() || 0) / (60 * 60 * 24)
+  const isOwner = query2.data?.[0] === address && !!address
   return (
     <Layout>
       <Paper elevation={0} sx={{ border: '2px solid #B2B5B2', padding: 2 }}>
@@ -93,19 +93,15 @@ function OwnerFlow(props) {
       {props.data && (
         <Box sx={{ mt: 4 }}>
           <Typography variant="body1" gutterBottom>
-            Owner of the vault: {props.data.owner}
+            Owner of the vault: {props.data[0]}
           </Typography>
 
           <Typography variant="body1" gutterBottom>
             <Tooltip title="The last time you reported yourself as alive with the Button below">
               <span>
                 Last life signal:{' '}
-                {new Date(
-                  props.data.lastAlive.toNumber() * 1000,
-                ).toLocaleDateString()}{' '}
-                {new Date(
-                  props.data.lastAlive.toNumber() * 1000,
-                ).toLocaleTimeString()}
+                {new Date(props.data[1].toNumber() * 1000).toLocaleDateString()}{' '}
+                {new Date(props.data[1].toNumber() * 1000).toLocaleTimeString()}
               </span>
             </Tooltip>
           </Typography>
